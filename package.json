@@ -1,0 +1,38 @@
+{
+  "name": "log-a-log",
+  "description": "Simple console.log enhancement.",
+  "keywords": [
+    "Console",
+    "Logging"
+  ],
+  "version": "1.0.0",
+  "author": "Joel Edwards (https://github.com/joeledwards)",
+  "contributors": [
+    "Joel Edwards <joeledwards@gmail.com> (https://github.com/joeledwards)"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/joeledwards/node-logalog.git"
+  },
+  "license": "MIT",
+  "main": "./lib/index",
+  "directories": {
+    "lib": "./lib"
+  },
+  "dependencies": {
+    "moment": "^2"
+  },
+  "devDependencies": {
+    "coffee-script": "~1",
+    "mocha": "~2",
+    "timeunit": "~1"
+  },
+  "scripts": {
+    "prepublish": "cake build",
+    "build": "cake build",
+    "test": "cake test"
+  },
+  "engines": {
+    "node": ">=0.10.0"
+  }
+}
