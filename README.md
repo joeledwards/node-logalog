@@ -1,52 +1,21 @@
 
-Stopwatch
+Log-a-log
 ===========
 
-A nanosecond granularity stopwatch with chainable control methods,
-and formatting built in.
-
-Timer
-=====
-
-Times the execution of a function, and returns the duration.
-
-Duration
-========
-
-Represents a duration with nanosecond granularity, and provides methods
-for converting to other granularities, and formatting the duration.
-
-Installation
-============
-
-```bash
-npm install --save durations
-```
-
-Usage
-=====
+A log decorator for the console.log() method.
 
 ```coffeescript
-durations = require 'durations'
+logalog = require 'log-a-log'
 
-watch = durations.stopwatch()
-watch.stop()  # Pauses the stopwatch. Returns the stopwatch.
-watch.start() # Starts the stopwatch from where it was last stopped. Returns the stopwatch.
-watch.reset() # Reset the stopwatch (duration is set back to zero). Returns the stopwatch.
-duration = watch.duration() # Returns the Duration.
+logalog({utc: false})
 
-console.log "Took", durations.time(someFunction), "to do something."
+name = "world"
 
-durations.timeAsync(someFunction).then((duration) ->
-  console.log "Took", duration.format(), "to do something."
-)
-
-console.log "Duration is", durations.duration(nanoseconds).format()
+console.log "Hello, #{name}!"
 ```
       
-
-Compatibilty
-============
-
-The `durations` module uses `process.hrtime()`, therefore it will work only in node.js, not in browsers.
+Output:
+```
+[2015-10-30T21:52:05.520-06:00] Hello, world!
+```
 
