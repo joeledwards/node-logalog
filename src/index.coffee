@@ -1,6 +1,7 @@
 moment = require 'moment'
 
 console_log = console.log
+console_error = console.error
 
 now = (utc=true) ->
   if utc
@@ -14,6 +15,8 @@ timeLog = (config) ->
 
   console.log = (args...) ->
     console_log "[#{now(cfg.utc)}]", args...
+  console.error = (args...) ->
+    console_error "[#{now(cfg.utc)}]", args...
 
 timeLog({utc: true})
 
