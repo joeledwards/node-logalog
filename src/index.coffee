@@ -15,35 +15,39 @@ resetConfig = ->
   console.log = console_log
   console.error = console_error
 
+# Default configuration
+savedConfig =
+  utc: true
+  alias: undefined
+  error: true
+  info: false
+
 # Add a timestamp to the console.log and console.error functions
 timeLog = (config) ->
-  cfg =
-    utc: config.utc ? true
-    alias: if config.alias? then "#{config.alias}|" else "|"
-    error: if config.error? then "#{config.error}>" else ">"
-    info: if config.info? then "#{config.info}>" else ">"
+  savedConfig.error = config.error ? savedConfig.error
+  savedConfig.info = config.info ? savedConfig.info
+  savedConfig.utc = config.utc ? savedConfig.utc
+  savedConfig.alias = config.alias
+
+  utc = savedConfig.utc
+  alias = if savedConfig.alias? then "#{savedConfig.alias}|" else "|"
+  error = if savedConfig.error == true then "ERROR>" else ">"
+  info = if savedConfig.info == true then "INFO>" else ">"
 
   # Overwrite the console.log() function
   console.log = (args...) ->
     [first, rest...] = args
-    message = "[#{now(cfg.utc)}]#{cfg.alias}#{cfg.info} #{first ? ''}"
+    message = "[#{now(utc)}]#{alias}#{info} #{first ? ''}"
     console_log message, rest...
 
   # Overwrite the console.error() function
   console.error = (args...) ->
     [first, rest...] = args
-    message = "[#{now(cfg.utc)}]#{cfg.alias}#{cfg.error} #{first ? ''}"
+    message = "[#{now(utc)}]#{alias}#{error} #{first ? ''}"
     console_error message, rest...
 
-# Default configuration
-defaultConfig =
-  utc: true
-  alias: undefined
-  error: "ERROR"
-  info: undefined
-
 # Set with the defaults
-timeLog(defaultConfig)
+timeLog(savedConfig)
 
 # Make available to the user so they can configure explicitly
 module.exports =

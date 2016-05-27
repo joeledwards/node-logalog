@@ -21,21 +21,13 @@ describe "log-a-log", ->
     console.error "an error"
 
     logalog.init({
-      info: 'INFO'
+      info: true
     })
     console.log "some info"
     console.error "an error"
 
     logalog.init({
-      error: 'error'
-    })
-    console.log "some info"
-    console.error "an error"
-
-    logalog.init({
-      alias: 'alias'
-      error: 'error'
-      info: 'info'
+      error: true
     })
     console.log "some info"
     console.error "an error"
@@ -47,6 +39,7 @@ describe "log-a-log", ->
 
     logalog.init({
       alias: 'cake'
+      info: false
     })
 
     done()
