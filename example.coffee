@@ -7,7 +7,7 @@ console.log "This log should be prefixed with an ISO-8601 formatted timestamp in
 
 logalog.init({mode: 'local'})
 
-console.log "This log should be prefixed with an ISO-8601 formatted timestamp in the Local timezone."
+console.log "This log should be prefixed with an ISO-8601 formatted timestamp in the local timezone."
 
 logalog.init({mode: 'unix', info: true, alias: 'example'})
 
@@ -20,7 +20,11 @@ console.warn "warning"
 console.info "informational"
 console.debug "debugging"
 
+logalog.init({mode: 'coded', alias: 'colorful', info: true})
+
+console.log "This log should be prefixed with a color coded, ISO-8601 formatted timestamp in the local timezone."
+
 logalog.init({mode: 'pony', alias: 'rainbows', info: true})
 
-console.log "This log should be prefixed with a beautifully colorized, ISO-8601 formatted timestamp in the Local timezone."
+console.log "This log should be prefixed with a beautifully colorized, ISO-8601 formatted timestamp in the local timezone."
 
