@@ -29,6 +29,20 @@ now = (mode) ->
     S = purple(moment().format('SSS'))
     Z = blue(moment().format('Z'))
     "#{Y}#{d}#{M}#{d}#{D}#{T}#{H}#{c}#{m}#{c}#{s}#{p}#{S}#{Z}"
+  else if mode == 'coded'
+    d = gray('-')
+    T = gray('T')
+    c = gray(':')
+    p = gray('.')
+    Y = green(moment().format('YYYY'))
+    M = green(moment().format('MM'))
+    D = green(moment().format('DD'))
+    H = yellow(moment().format('HH'))
+    m = yellow(moment().format('mm'))
+    s = yellow(moment().format('ss'))
+    S = yellow(moment().format('SSS'))
+    Z = gray(moment().format('Z'))
+    "#{Y}#{d}#{M}#{d}#{D}#{T}#{H}#{c}#{m}#{c}#{s}#{p}#{S}#{Z}"
   else
     blue(moment.utc().toISOString())
 
@@ -46,7 +60,7 @@ savedConfig =
   alias: undefined
   error: true
   warn: true
-  info: false
+  info: true
   debug: true
 
 # Add a timestamp to the console.log and console.error functions
