@@ -5,11 +5,22 @@ logalog = require './src/index'
 
 console.log "This log should be prefixed with an ISO-8601 formatted timestamp in the UTC timezone."
 
-logalog({utc: false})
+logalog.init({mode: 'local'})
 
 console.log "This log should be prefixed with an ISO-8601 formatted timestamp in the Local timezone."
 
-logalog({utc: true})
+logalog.init({mode: 'unix', info: true, alias: 'example'})
 
-console.error "This error line should be prefixed with an ISO-8601 formatted timestamp in UTC timezone."
+console.log "This log should be prefixed with a millisecond unix timestamp."
+
+logalog.init({mode: 'utc', info: true, alias: 'example'})
+
+console.error "error"
+console.warn "warning"
+console.info "informational"
+console.debug "debugging"
+
+logalog.init({mode: 'pony', alias: 'rainbows', info: true})
+
+console.log "This log should be prefixed with a beautifully colorized, ISO-8601 formatted timestamp in the Local timezone."
 

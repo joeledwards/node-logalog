@@ -7,7 +7,7 @@ A log decorator for the console.log() method.
 ```coffeescript
 logalog = require 'log-a-log'
 
-logalog.init({utc: false, alias: 'my-script'})
+logalog.init({mode: 'local', alias: 'my-script'})
 
 name = "world"
 

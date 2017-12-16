@@ -1,50 +1,81 @@
 moment = require 'moment'
+color = require './color'
 
-console_log = console.log
+{red, orange, yellow, green, blue, purple, gray} = color
+
 console_error = console.error
+console_warn = console.warn
+console_log = console.log
+console_info = console.info
+console_debug = console.debug
 
 # Format the current time according to ISO-8601
-now = (utc=true) ->
-  if utc
-    moment.utc().toISOString()
+now = (mode) ->
+  if mode == 'local'
+    blue(moment().format("YYYY-MM-DDTHH:mm:ss.SSSZ"))
+  else if mode == 'unix'
+    blue("#{Date.now()}")
+  else if mode == 'pony'
+    d = gray('-')
+    T = gray('T')
+    c = gray(':')
+    p = gray('.')
+    Y = purple(moment().format('YYYY'))
+    M = blue(moment().format('MM'))
+    D = green(moment().format('DD'))
+    H = yellow(moment().format('HH'))
+    m = orange(moment().format('mm'))
+    s = red(moment().format('ss'))
+    S = purple(moment().format('SSS'))
+    Z = blue(moment().format('Z'))
+    "#{Y}#{d}#{M}#{d}#{D}#{T}#{H}#{c}#{m}#{c}#{s}#{p}#{S}#{Z}"
   else
-    moment().format("YYYY-MM-DDTHH:mm:ss.SSSZ")
+    blue(moment.utc().toISOString())
 
 # Reset the configuration to the defaults
 resetConfig = ->
-  console.log = console_log
   console.error = console_error
+  console.warn = console_warn
+  console.log = console_log
+  console.info = console_info
+  console.debug = console_debug
 
 # Default configuration
 savedConfig =
-  utc: true
+  mode: 'utc'
   alias: undefined
   error: true
+  warn: true
   info: false
+  debug: true
 
 # Add a timestamp to the console.log and console.error functions
-timeLog = (config) ->
+timeLog = (config = {}) ->
+  savedConfig.mode = config.mode ? savedConfig.mode
   savedConfig.error = config.error ? savedConfig.error
+  savedConfig.warn = config.warn ? savedConfig.warn
   savedConfig.info = config.info ? savedConfig.info
-  savedConfig.utc = config.utc ? savedConfig.utc
+  savedConfig.debug = config.debug ? savedConfig.debug
   savedConfig.alias = config.alias
 
-  utc = savedConfig.utc
-  alias = if savedConfig.alias? then "#{savedConfig.alias}|" else "|"
-  error = if savedConfig.error == true then "ERROR>" else ">"
-  info = if savedConfig.info == true then "INFO>" else ">"
+  mode = savedConfig.mode
+  alias = if savedConfig.alias? then "#{orange(savedConfig.alias)}|" else "|"
+  error = if savedConfig.error == true then "#{red('ERROR')}>" else ">"
+  debug = if savedConfig.debug == true then "#{purple('DEBUG')}>" else ">"
+  warn = if savedConfig.warn == true then "#{yellow('WARN')}>" else ">"
+  info = if savedConfig.info == true then "#{green('INFO')}>" else ">"
 
-  # Overwrite the console.log() function
-  console.log = (args...) ->
-    [first, rest...] = args
-    message = "[#{now(utc)}]#{alias}#{info} #{first ? ''}"
-    console_log message, rest...
+  sub = (logger, category) ->
+    (args...) ->
+      [first, rest...] = args
+      message = "[#{now(mode)}]#{alias}#{category} #{first ? ''}"
+      logger message, rest...
 
-  # Overwrite the console.error() function
-  console.error = (args...) ->
-    [first, rest...] = args
-    message = "[#{now(utc)}]#{alias}#{error} #{first ? ''}"
-    console_error message, rest...
+  console.error = sub(console_error, error)
+  console.warn = sub(console_warn, warn)
+  console.log = sub(console_log, info)
+  console.info = sub(console_info, info)
+  console.debug = sub(console_debug, debug)
 
 # Set with the defaults
 timeLog(savedConfig)

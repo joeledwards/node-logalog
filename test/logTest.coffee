@@ -42,5 +42,12 @@ describe "log-a-log", ->
       info: false
     })
 
+    console.error "error()"
+    console.warn "warn()"
+    console.info "info()"
+    console.debug "debug()"
+
+    logalog.reset()
+
     done()
 
