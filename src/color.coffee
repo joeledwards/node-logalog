@@ -4,13 +4,13 @@ key = (name) -> chalk.keyword name
 hex = (code) -> chalk.hex code
 
 module.exports =
-  red: chalk.red
-  orange: key 'orange'
-  yellow: chalk.yellow
-  green: chalk.green
-  blue: key 'lightblue'
-  purple: key 'purple'
-  gray: key 'gray'
+  red: hex 'd43'
+  orange: hex 'e83'
+  yellow: hex 'dc3'
+  green: hex '6b3'
+  blue: hex '3ad'
+  purple: hex '95f'
+  gray: hex 'aaa'
   key: key
   hex: hex
 
