@@ -98,3 +98,4 @@ timeLog(savedConfig)
 module.exports =
   init: timeLog
   reset: resetConfig
+  color: color
