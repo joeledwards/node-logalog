@@ -1,5 +1,5 @@
 moment = require 'moment'
-color = require './color'
+color = require '@buzuli/color'
 
 {red, orange, yellow, green, blue, purple, gray} = color
 
