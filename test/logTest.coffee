@@ -1,43 +1,45 @@
 assert = require 'assert'
 timeunit = require 'timeunit'
 logalog = require '../src/index.coffee'
-logalog.init({
+logalog({
   alias: 'cake'
 })
 
 describe "log-a-log", ->
   it "should expose init and reset functions", (done) ->
-    logalog.init({
+    logalog({
       error: 'ERROR'
     })
 
     console.log "some info"
     console.error "an error"
 
-    logalog.init({
+    logalog({
       alias: 'alias'
     })
     console.log "some info"
     console.error "an error"
 
-    logalog.init({
+    logalog({
       info: true
     })
     console.log "some info"
     console.error "an error"
 
-    logalog.init({
+    logalog({
       error: true
     })
     console.log "some info"
     console.error "an error"
 
-    logalog.reset()
+    logalog({
+      console: false
+    })
 
     console.log "some info"
     console.error "an error"
 
-    logalog.init({
+    logalog({
       alias: 'cake'
       info: false
     })
@@ -47,7 +49,9 @@ describe "log-a-log", ->
     console.info "info()"
     console.debug "debug()"
 
-    logalog.reset()
+    logalog({
+      console: false
+    })
 
     done()
 

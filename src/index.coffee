@@ -46,17 +46,10 @@ now = (mode) ->
   else
     blue(moment.utc().toISOString())
 
-# Reset the configuration to the defaults
-resetConfig = ->
-  console.error = console_error
-  console.warn = console_warn
-  console.log = console_log
-  console.info = console_info
-  console.debug = console_debug
-
 # Default configuration
-savedConfig =
+defaultConfig =
   mode: 'utc'
+  console: true
   alias: undefined
   error: true
   warn: true
@@ -64,38 +57,43 @@ savedConfig =
   debug: true
 
 # Add a timestamp to the console.log and console.error functions
-timeLog = (config = {}) ->
-  savedConfig.mode = config.mode ? savedConfig.mode
-  savedConfig.error = config.error ? savedConfig.error
-  savedConfig.warn = config.warn ? savedConfig.warn
-  savedConfig.info = config.info ? savedConfig.info
-  savedConfig.debug = config.debug ? savedConfig.debug
-  savedConfig.alias = config.alias
+initialize = (config = {}) ->
+  cfg = {
+    mode: config.mode ? defaultConfig.mode
+    console: config.console ? defaultConfig.console
+    alias: config.alias ? defaultConfig.alias
+    error: config.error ? defaultConfig.error
+    warn: config.warn ? defaultConfig.warn
+    info: config.info ? defaultConfig.info
+    debug: config.debug ? defaultConfig.debug
+  }
 
-  mode = savedConfig.mode
-  alias = if savedConfig.alias? then "#{orange(savedConfig.alias)}|" else "|"
-  error = if savedConfig.error == true then "#{red('ERROR')}>" else ">"
-  debug = if savedConfig.debug == true then "#{purple('DEBUG')}>" else ">"
-  warn = if savedConfig.warn == true then "#{yellow('WARN')}>" else ">"
-  info = if savedConfig.info == true then "#{green('INFO')}>" else ">"
+  alias = if cfg.alias? then "#{orange(cfg.alias)}|" else "|"
+  error = if cfg.error == true then "#{red('ERROR')}>" else ">"
+  debug = if cfg.debug == true then "#{purple('DEBUG')}>" else ">"
+  warn = if cfg.warn == true then "#{yellow('WARN')}>" else ">"
+  info = if cfg.info == true then "#{green('INFO')}>" else ">"
 
   sub = (logger, category) ->
     (args...) ->
       [first, rest...] = args
-      message = "[#{now(mode)}]#{alias}#{category} #{first ? ''}"
+      message = "[#{now(cfg.mode)}]#{alias}#{category} #{first ? ''}"
       logger message, rest...
 
-  console.error = sub(console_error, error)
-  console.warn = sub(console_warn, warn)
-  console.log = sub(console_log, info)
-  console.info = sub(console_info, info)
-  console.debug = sub(console_debug, debug)
+  logger =
+    error: sub(console_error, error)
+    warn: sub(console_warn, warn)
+    info: sub(console_info, info)
+    debug: sub(console_debug, debug)
+    color: color
 
-# Set with the defaults
-timeLog(savedConfig)
+  console.error = if cfg.console then logger.error else console_error
+  console.warn = if cfg.console then logger.warn else console_warn
+  console.log = if cfg.console then logger.info else console_log
+  console.info = if cfg.console then logger.info else console_info
+  console.debug = if cfg.console then logger.debug else console_debug
+
+  logger
 
 # Make available to the user so they can configure explicitly
-module.exports =
-  init: timeLog
-  reset: resetConfig
-  color: color
+module.exports = initialize
