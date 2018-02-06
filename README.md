@@ -38,5 +38,5 @@ Sample Output:
 
 [travis-url]: https://travis-ci.org/joeledwards/node-logalog
 [travis-image]: https://img.shields.io/travis/joeledwards/node-logalog/master.svg
-[npm-url]: https://www.npmjs.com/package/log-a.log
+[npm-url]: https://www.npmjs.com/package/log-a-log
 [npm-image]: https://img.shields.io/npm/v/log-a-log.svg
