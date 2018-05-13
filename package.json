@@ -20,13 +20,12 @@
     "lib": "./lib"
   },
   "dependencies": {
-    "@buzuli/color": "^1.1.1",
-    "chalk": "^2.3.0",
-    "moment": "^2.19.4"
+    "@buzuli/color": "^1.2.0",
+    "moment": "^2.22.1"
   },
   "devDependencies": {
     "coffee-script": "^1.12.7",
-    "mocha": "^2.5.3",
+    "mocha": "^5.1.1",
     "timeunit": "^1.1.1"
   },
   "scripts": {
