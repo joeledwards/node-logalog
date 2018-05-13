@@ -21,13 +21,13 @@ describe "log-a-log", ->
     console.error "an error"
 
     logalog({
-      info: true
+      info: 'INFO-CUSTOM'
     })
     console.log "some info"
     console.error "an error"
 
     logalog({
-      error: true
+      error: 'ERROR-CUSTOM'
     })
     console.log "some info"
     console.error "an error"
@@ -41,13 +41,14 @@ describe "log-a-log", ->
 
     logalog({
       alias: 'cake'
-      info: false
+      warn: 'WARNING'
+      info: 'INFORMATIONAL'
     })
 
     console.error "error()"
     console.warn "warn()"
     console.info "info()"
-    console.debug "debug()"
+    console.verbose "verbose()"
 
     logalog({
       console: false

@@ -7,7 +7,7 @@ console_error = console.error
 console_warn = console.warn
 console_log = console.log
 console_info = console.info
-console_debug = console.debug
+console_noop = () => {}
 
 # Format the current time according to ISO-8601
 now = (mode) ->
@@ -53,10 +53,6 @@ defaultConfig =
   mode: 'utc'
   console: true
   alias: undefined
-  error: true
-  warn: true
-  info: true
-  debug: true
 
 # Add a timestamp to the console.log and console.error functions
 initialize = (config = {}) ->
@@ -64,17 +60,17 @@ initialize = (config = {}) ->
     mode: config.mode ? defaultConfig.mode
     console: config.console ? defaultConfig.console
     alias: config.alias ? defaultConfig.alias
-    error: config.error ? defaultConfig.error
-    warn: config.warn ? defaultConfig.warn
-    info: config.info ? defaultConfig.info
-    debug: config.debug ? defaultConfig.debug
+    error: config.error ? 'ERROR'
+    verbose: config.verbose ? 'VERBOSE'
+    warn: config.warn ? 'WARN'
+    info: config.info ? 'INFO'
   }
 
-  alias = if cfg.alias? then "#{orange(cfg.alias)}|" else "|"
-  error = if cfg.error == true then "#{red('ERROR')}>" else ">"
-  debug = if cfg.debug == true then "#{purple('DEBUG')}>" else ">"
-  warn = if cfg.warn == true then "#{yellow('WARN')}>" else ">"
-  info = if cfg.info == true then "#{green('INFO')}>" else ">"
+  alias = if cfg.alias? then "#{orange(cfg.alias)}|" else ""
+  error = "#{red(cfg.error)}>"
+  verbose = "#{purple(cfg.verbose)}>"
+  warn = "#{yellow(cfg.warn)}>"
+  info = "#{green(cfg.info)}>"
 
   sub = (logger, category) ->
     (args...) ->
@@ -86,14 +82,14 @@ initialize = (config = {}) ->
     error: sub(console_error, error)
     warn: sub(console_warn, warn)
     info: sub(console_info, info)
-    debug: sub(console_debug, debug)
+    verbose: sub(console_info, verbose)
     color: color
 
   console.error = if cfg.console then logger.error else console_error
   console.warn = if cfg.console then logger.warn else console_warn
   console.log = if cfg.console then logger.info else console_log
   console.info = if cfg.console then logger.info else console_info
-  console.debug = if cfg.console then logger.debug else console_debug
+  console.verbose = if cfg.console then logger.verbose else console_noop
 
   logger
 
