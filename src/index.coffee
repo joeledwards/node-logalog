@@ -54,29 +54,39 @@ defaultConfig =
   console: true
   alias: undefined
 
+# Level validator
+validateLevel = (defaultLabel, defaultEnabled = true) ->
+  (cfgValue) ->
+    if cfgValue?
+      if cfgValue == true then defaultLabel else cfgValue
+    else
+      if defaultEnabled then defaultLabel else false
+
 # Add a timestamp to the console.log and console.error functions
 initialize = (config = {}) ->
   cfg = {
     mode: config.mode ? defaultConfig.mode
     console: config.console ? defaultConfig.console
     alias: config.alias ? defaultConfig.alias
-    error: config.error ? 'ERROR'
-    verbose: config.verbose ? 'VERBOSE'
-    warn: config.warn ? 'WARN'
-    info: config.info ? 'INFO'
+    error: validateLevel('ERROR')(config.error)
+    warn: validateLevel('WARN')(config.warn)
+    info: validateLevel('INFO')(config.info)
+    verbose: validateLevel('VERBOSE', false)(config.verbose)
   }
 
   alias = if cfg.alias? then "#{orange(cfg.alias)}|" else ""
-  error = "#{red(cfg.error)}>"
-  verbose = "#{purple(cfg.verbose)}>"
-  warn = "#{yellow(cfg.warn)}>"
-  info = "#{green(cfg.info)}>"
+  error = if cfg.error then "#{red(cfg.error)}>" else false
+  warn = if cfg.warn then "#{yellow(cfg.warn)}>" else false
+  info = if cfg.info then "#{green(cfg.info)}>" else false
+  verbose = if cfg.verbose then  "#{purple(cfg.verbose)}>" else false
 
-  sub = (logger, category) ->
-    (args...) ->
-      [first, rest...] = args
-      message = "[#{now(cfg.mode)}]#{alias}#{category} #{first ? ''}"
-      logger message, rest...
+  sub = (logger, categoryLabel) ->
+    if categoryLabel
+      (args...) ->
+        [first, rest...] = args
+        message = "[#{now(cfg.mode)}]#{alias}#{categoryLabel} #{first ? ''}"
+        logger message, rest...
+    else ->
 
   logger =
     error: sub(console_error, error)

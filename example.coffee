@@ -19,11 +19,19 @@ logalog({mode: 'utc', alias: 'example'})
 console.error "error"
 console.warn "warning"
 console.info "informational"
+console.verbose "verbose disabled (YOU SHOULD NOT SEE THIS)"
+
+logalog({verbose: true, error: false, warn: false, info: false})
+
+console.error "error disabled (YOU SHOULD NOT SEE THIS)"
+console.warn "warn disabled (YOU SHOULD NOT SEE THIS)"
+console.info "info disabled (YOU SHOULD NOT SEE THIS)"
 console.verbose "verbose"
 
-logalog({mode: 'utc', info: 'INFORMATIONAL'})
+logalog({mode: 'utc', info: 'INFORMATIONAL', verbose: 'VERB'})
 
 console.info "The level idenfitier should be customized."
+console.verbose "The verbose idenfitier should be customized."
 
 logalog({mode: 'coded', alias: 'colorful'})
 
