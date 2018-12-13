@@ -18,6 +18,9 @@ There are a number of operational modes, configured via the `mode` parameter:
 * `coded` - renders a color-coded, local, ISO-8601 timestamp 
 * `pony` - renders a very colorful, local, ISO-8601 timestamp
 
+## Configuration
+Uses `@buzuli/color`, so colors can be configured to your preference (https://www.npmjs.com/package/@buzuli/color#configuration).
+
 ## Example
 ```javascript
 const logalog = require('log-a-log')
