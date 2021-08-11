@@ -12,11 +12,11 @@ npm install log-a-log
 
 ## Modes
 There are a number of operational modes, configured via the `mode` parameter:
-* `utc` - the default mode, which renders a ISO-8601 UTC timestamp in a single color
-* `local` - renders a local, ISO-8610 timestamp
+* `local` - renders a local, ISO-8601 timestamp
+* `coded` - renders a color-coded, UTC, ISO-8601 timestamp
+* `pony` - renders a very colorful, UTC, ISO-8601 timestamp
+* `utc` [default] - renders single-color, UTC, ISO-8601 UTC timestamp
 * `unix` - renders a millisecond-granularity unix timestamp
-* `coded` - renders a color-coded, local, ISO-8601 timestamp 
-* `pony` - renders a very colorful, local, ISO-8601 timestamp
 
 ## Configuration
 Uses `@buzuli/color`, so colors can be configured to your preference (https://www.npmjs.com/package/@buzuli/color#configuration).

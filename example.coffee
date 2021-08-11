@@ -35,9 +35,9 @@ console.verbose "The verbose idenfitier should be customized."
 
 logalog({mode: 'coded', alias: 'colorful'})
 
-console.log "This log should be prefixed with a color coded, ISO-8601 formatted timestamp in the local timezone."
+console.log "This log should be prefixed with a color coded, ISO-8601 formatted, UTC timestamp."
 
 logalog({mode: 'pony', alias: 'rainbows'})
 
-console.log "This log should be prefixed with a beautifully colorized, ISO-8601 formatted timestamp in the local timezone."
+console.log "This log should be prefixed with a beautifully colorized, ISO-8601 formatted, UTC timesatmp."
 

@@ -29,6 +29,7 @@
     "timeunit": "^1.1.1"
   },
   "scripts": {
+    "example": "coffee example.coffee",
     "prepublish": "cake build",
     "build": "cake build",
     "test": "cake test"
