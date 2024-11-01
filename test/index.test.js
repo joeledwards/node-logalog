@@ -2,9 +2,9 @@ const tap = require('tap')
 
 const logalog = require('../lib/index')
 
-logalog({ alias: 'tap' })
-
 tap.test("should expose init and reset functions", async assert => {
+    logalog({ alias: 'tap' })
+
     logalog({ error: 'ERROR' })
     console.log("some info")
     console.error("an error")
@@ -27,9 +27,9 @@ tap.test("should expose init and reset functions", async assert => {
     console.error("an error")
 
     logalog({
-      alias: 'tap'
-      warn: 'WARNING'
-      info: 'INFORMATIONAL'
+      alias: 'tap',
+      warn: 'WARNING',
+      info: 'INFORMATIONAL',
     })
     console.error("error()")
     console.warn("warn()")
