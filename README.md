@@ -1,6 +1,5 @@
 # Log-a-log
 
-[![Build Status][travis-image]][travis-url]
 [![NPM version][npm-image]][npm-url]
 
 A simple logger and optional decorator for console.log() and company.
@@ -39,7 +38,5 @@ Sample Output:
 [2015-10-30T21:52:05.520-06:00]my-script|ERROR> Oh noes, world!
 ```
 
-[travis-url]: https://travis-ci.org/joeledwards/node-logalog
-[travis-image]: https://img.shields.io/travis/joeledwards/node-logalog/master.svg
 [npm-url]: https://www.npmjs.com/package/log-a-log
 [npm-image]: https://img.shields.io/npm/v/log-a-log.svg

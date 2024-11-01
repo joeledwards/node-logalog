@@ -1,40 +1,38 @@
 {
   "name": "log-a-log",
-  "description": "Simple logger and console enhancement.",
-  "keywords": [
-    "Console",
-    "Logging"
-  ],
   "version": "6.2.1",
-  "author": "Joel Edwards (https://github.com/joeledwards)",
-  "contributors": [
-    "Joel Edwards <joeledwards@gmail.com> (https://github.com/joeledwards)"
+  "description": "Simple logger and console enhancement.",
+  "files": [
+    "lib/**/*.js",
+    "package.json",
+    "README.md"
   ],
+  "main": "./lib/index",
   "repository": {
     "type": "git",
     "url": "https://github.com/joeledwards/node-logalog.git"
   },
   "license": "MIT",
-  "main": "./lib/index",
-  "directories": {
-    "lib": "./lib"
+  "devDependencies": {
+    "tap": "^21.0.1"
   },
   "dependencies": {
     "@buzuli/color": "^2.4.0",
     "moment": "^2.23.0"
   },
-  "devDependencies": {
-    "coffee-script": "^1.12.7",
-    "mocha": "^5.2.0",
-    "timeunit": "^1.1.1"
+  "engines": {
+    "node": ">=12.0.0"
   },
   "scripts": {
-    "example": "coffee example.coffee",
-    "prepublish": "cake build",
-    "build": "cake build",
-    "test": "cake test"
+    "example": "node example.js",
+    "test": "tap test/*.test.js"
   },
-  "engines": {
-    "node": ">=4.0.0"
-  }
+  "keywords": [
+    "Console",
+    "Logging"
+  ],
+  "author": "Joel Edwards (https://github.com/joeledwards)",
+  "contributors": [
+    "Joel Edwards <joeledwards@gmail.com> (https://github.com/joeledwards)"
+  ]
 }
