@@ -1,6 +1,6 @@
 {
   "name": "log-a-log",
-  "version": "7.0.0",
+  "version": "7.0.1",
   "description": "Simple logger and console enhancement.",
   "files": [
     "lib/**/*.js",
