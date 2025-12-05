@@ -17,7 +17,7 @@
     "tap": "^21.0.1"
   },
   "dependencies": {
-    "@buzuli/color": "^2.4.0",
+    "@buzuli/color": "^2.4.1",
     "moment": "^2.23.0"
   },
   "engines": {
